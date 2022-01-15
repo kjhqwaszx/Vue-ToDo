@@ -9,18 +9,21 @@
 
 <script>
 export default {
+
   data(){
     return{
-      newTodoItem:""
+      newTodoItem: ""
     }
   },
+  
   methods:{
     addTodo(){
       if(this.newTodoItem !== ''){
-        var obj={completed:false, item: this.newTodoItem}
-        localStorage.setItem(this.newTodoItem,JSON.stringify(obj))
-        this.clearInput()
+
+        this.$emit('addItem', this.newTodoItem)
+        this.clearInput() 
       }
+
     },
     clearInput(){
       this.newTodoItem = ''
