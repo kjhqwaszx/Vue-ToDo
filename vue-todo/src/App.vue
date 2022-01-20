@@ -16,16 +16,21 @@ import TodoFooter from './components/TodoFooter.vue'
 export default {
 
   components:{
-      'TodoHeader': TodoHeader,
-      'TodoList': TodoList,
-      'TodoInput': TodoInput,
-      'TodoFooter': TodoFooter
+    // ES6 축약 기능으로 KEY, VALUE가 동일하면 축약 가능
+      // 'TodoHeader': TodoHeader,
+      // 'TodoList': TodoList,
+      // 'TodoInput': TodoInput,
+      // 'TodoFooter': TodoFooter
+      TodoHeader,
+      TodoList,
+      TodoInput,
+      TodoFooter
   },
 
   created(){
     if(localStorage.length > 0){
       console.log(JSON.stringify(localStorage))
-      for(var i=0; i<localStorage.length; i++){
+      for(let i=0; i<localStorage.length; i++){
         if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
           
           this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
@@ -42,7 +47,7 @@ export default {
   methods:{
     addOneItem(todoItem){
 
-      var obj={completed:false, item: todoItem}
+      const obj={completed:false, item: todoItem}
       localStorage.setItem(todoItem, JSON.stringify(obj))
 
       this.todoItems.push(obj)

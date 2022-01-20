@@ -1,0 +1,17 @@
+* const MAX_NUM = 100
+ 상수개념으로 한번 선언한 값에대해 수정이 불가능하다.
+
+* let a = 10 -> let a = 20 (재선언 불가)
+한번 선언한 후 값 수정은 가능하지만, 다시 선언하는건 불가능
+
+* 화살표 함수 
+
+ - ES5 기준
+ var sum = function(a,b){
+     return a+b;
+ }
+
+ - ES6
+ var sum = (a,b) => {
+     return a+b;
+ }
