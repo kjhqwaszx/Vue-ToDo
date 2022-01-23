@@ -1,10 +1,10 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-        <li v-for="(todoItem,index) in this.$store.state.todoItems" :key="todoItem.item" class="shadow">
-          <i class="fas fa-check checkBtn" :class="{checkBtnCompleted:todoItem.completed}" @click="toggleComplete(todoItem,index)"></i>
+        <li v-for="(todoItem,index) in getTodoItems" :key="todoItem.item" class="shadow">
+          <i class="fas fa-check checkBtn" :class="{checkBtnCompleted:todoItem.completed}" @click="toggleComplete({todoItem,index})"></i>
           <span :class="{textCompleted:todoItem.completed}">{{todoItem.item}}</span>
-          <span class="removeBtn" @click="removeTodo(todoItem,index)">
+          <span class="removeBtn" @click="removeTodo({todoItem,index})">
             <i class="fas fa-trash" ></i>
           </span>
         </li>
@@ -13,21 +13,21 @@
 </template>
 
 <script>
-export default {
+import {mapGetters, mapMutations} from 'vuex'
 
+export default {
+  computed:{
+    ...mapGetters(['getTodoItems'])
+  },
   methods:{
-    removeTodo(todoItem,index){
-      this.$store.commit('removeOneItem',{
-        todoItem: todoItem,
-        index: index
-      })
-    },
-    toggleComplete(todoItem,index){
-      this.$store.commit('compltItem',{
-        todoItem: todoItem,
-        index: index
-      })
-    }
+    ...mapMutations({
+      removeTodo : 'removeOneItem', // 보내는 파라메터는 자동으로 전달된다. {todoItem,index}
+      toggleComplete: 'compltItem'  
+    })
+
+    // ...mapMutations(['removeOneItem','compltItem']),
+    // 이렇게도 선언이 가능. 대신, @click = "removeOneItem" / @clcick = "compltItem" 이렇게 연결해 줘야함
+
   }
     
 }
