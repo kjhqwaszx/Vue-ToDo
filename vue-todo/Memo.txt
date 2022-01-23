@@ -145,13 +145,19 @@
 
     < App.vue >
     methods:{
-      ...mapMutations(['clickBtn']),   // == ...mapMutations( {clickBtn: "clickBtn"} ) ES6에 따라 축약 후 배열로 만들어준 것
+      ...mapMutations(['clickBtn']),   // == ...mapMutations( {clickBtn: "clickBtn"} ) ES6에 따라 축약 후 배열로 만들어준 것, template에서 @click = "clickBtn"으로 정의
   //  ... mapMutations({
-  //       clicked: 'clickBtn'   clicked 호출 시 clickBtn 호출
+  //       clicked: 'clickBtn'   이와 같이 선언할 경우 template에서  @click="clicked" 로 해주어야한다. 
   //      })
-  //     위와 같이 선언할 @click="clicked" 로 해주어야한다. 
       ...mapActions(['delayClickBtn'])
     }
+
+
+[모듈화]
+
+  * 프로젝트가 커질수록 store의 내용이 많아지기 때문에 getters, mutations 등 파일을 따로 만들어 관리한다. (export, import 사용)
+
+  * 앱이 너~무 커서 1개의 store로 관리가 힘들 경우 modules 속성을 사용
         
 
   
